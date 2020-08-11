@@ -8,7 +8,7 @@ namespace MLHere.Api.Controllers
 {
     public class EMSReportController : BaseApiController
     {
-        private static readonly List<string> IoTEdgeIds = new List<string> { "HouseholdId1", "HouseholdId2" };
+        private static readonly List<string> IoTEdgeIds = new List<string> { "Edge1", "Edge2", "Edge3", "Edge4", "Edge5", "Edge6", "Edge7", "Edge8", "Edge9", "Edge10" };
 
         [HttpGet("GetEMSReport")]
         public IActionResult GetEMSReport(DateTimeOffset fromDateTime = default)
@@ -48,7 +48,8 @@ namespace MLHere.Api.Controllers
             // At night [19 - 6]
             if (hour >= 19 || hour <= 6)
             {
-                var baseValue = (decimal)0.000825; // kWh
+                var baseRandomValue = new Random().Next(800, 1000);
+                var baseValue = (decimal)baseRandomValue/1000000; // kWh
                 var ratio = (decimal)1; // [12 - 6]
                 if (hour >= 20 && hour <= 22) // اوج مصرف
                     ratio = (decimal)1.8;
@@ -67,7 +68,8 @@ namespace MLHere.Api.Controllers
             }
             else
             { // At day [6 - 19]
-                var baseValue = (decimal)0.001; // kWh
+                var baseRandomValue = new Random().Next(8, 12);
+                var baseValue = (decimal)baseRandomValue/10000; // kWh
                 var ratio = (decimal)1; // [6 - 12] & [15 - 17]
                 if (hour >= 12 && hour <= 15) // اوج مصرف
                     ratio = (decimal)1.5;
