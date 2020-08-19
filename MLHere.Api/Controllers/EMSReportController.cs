@@ -63,7 +63,9 @@ namespace MLHere.Api.Controllers
                     BatteryEnergyConsumption = baseValue * ratio * (decimal)0.3,
                     GridEnergyConsumption = baseValue * ratio * (decimal)0.7,
                     Cost = baseValue * ratio * costPerKwh,
-                    Saving = baseValue * ratio * (decimal)0.3 * costPerKwh // only using battery saved money
+                    Saving = baseValue * ratio * (decimal)0.3 * costPerKwh, // only using battery saved money
+                    PeriodBegin = DateTimeOffset.Now,
+                    PeriodEnd = DateTimeOffset.Now.AddSeconds(5)
                 };
             }
             else
@@ -81,7 +83,9 @@ namespace MLHere.Api.Controllers
                     BatteryEnergyConsumption = 0,
                     GridEnergyConsumption = baseValue * ratio * (decimal)0.4,
                     Cost = baseValue * ratio * costPerKwh,
-                    Saving = baseValue * ratio * (decimal)0.6 * costPerKwh // only using solar saved money
+                    Saving = baseValue * ratio * (decimal)0.6 * costPerKwh, // only using solar saved money
+                    PeriodBegin = DateTimeOffset.Now,
+                    PeriodEnd= DateTimeOffset.Now.AddSeconds(5)
                 };
             }
 

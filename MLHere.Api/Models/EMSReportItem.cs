@@ -1,4 +1,6 @@
-﻿namespace MLHere.Api.Models
+﻿using System;
+
+namespace MLHere.Api.Models
 {
     public class EMSReportItem
     {
@@ -13,6 +15,10 @@
         public decimal Cost { get; set; }
 
         public decimal Saving { get; set; }
+
+        public DateTimeOffset PeriodBegin { get; set; }
+
+        public DateTimeOffset PeriodEnd { get; set; }
 
     }
 }
