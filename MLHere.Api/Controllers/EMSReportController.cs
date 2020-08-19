@@ -9,15 +9,15 @@ namespace MLHere.Api.Controllers
     public class EMSReportController : BaseApiController
     {
         private static readonly List<string> IoTEdgeIds = new List<string> { "Edge1", "Edge2", "Edge3", "Edge4", "Edge5", "Edge6", "Edge7", "Edge8", "Edge9", "Edge10" };
-
-        [HttpGet("GetEMSReport")]
+               
+        [HttpGet("get-ems-report")]
         public IActionResult GetEMSReport(DateTimeOffset fromDateTime = default)
         {
             fromDateTime = fromDateTime == default ? DateTimeOffset.Now : fromDateTime;
             return Ok(GetReportData(fromDateTime));
         }
 
-        private List<EMSReportItem> GetReportData(DateTimeOffset fromDateTime)
+        List<EMSReportItem> GetReportData(DateTimeOffset fromDateTime)
         {
             var result = new List<EMSReportItem>();
 
@@ -29,7 +29,7 @@ namespace MLHere.Api.Controllers
             return result;
         }
 
-        private EMSReportItem GetEachHouseReport(string ioTEdgeId, DateTimeOffset fromDateTime)
+        EMSReportItem GetEachHouseReport(string ioTEdgeId, DateTimeOffset fromDateTime)
         {
             /*
              * Some Information:
@@ -64,8 +64,8 @@ namespace MLHere.Api.Controllers
                     GridEnergyConsumption = baseValue * ratio * (decimal)0.7,
                     Cost = baseValue * ratio * costPerKwh,
                     Saving = baseValue * ratio * (decimal)0.3 * costPerKwh, // only using battery saved money
-                    PeriodBegin = DateTimeOffset.Now,
-                    PeriodEnd = DateTimeOffset.Now.AddSeconds(5)
+                    PeriodBegin = DateTimeOffset.UtcNow,
+                    PeriodEnd = DateTimeOffset.UtcNow.AddSeconds(5)
                 };
             }
             else
@@ -84,8 +84,8 @@ namespace MLHere.Api.Controllers
                     GridEnergyConsumption = baseValue * ratio * (decimal)0.4,
                     Cost = baseValue * ratio * costPerKwh,
                     Saving = baseValue * ratio * (decimal)0.6 * costPerKwh, // only using solar saved money
-                    PeriodBegin = DateTimeOffset.Now,
-                    PeriodEnd= DateTimeOffset.Now.AddSeconds(5)
+                    PeriodBegin = DateTimeOffset.UtcNow,
+                    PeriodEnd= DateTimeOffset.UtcNow.AddSeconds(5)
                 };
             }
 

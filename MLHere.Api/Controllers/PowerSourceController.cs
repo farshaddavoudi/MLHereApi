@@ -5,7 +5,7 @@ namespace MLHere.Api.Controllers
 {
     public class PowerSourceController : BaseApiController
     {
-        [HttpGet("GetPowerSource")]
+        [HttpGet("get-power-source")]
         public IActionResult GetPowerSource(string ioTEdgeId)
         {
             return Ok("SolarPanel");
